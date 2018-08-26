@@ -15,8 +15,30 @@
 *   ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 *   OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
-#include "sha256.h"
-/* #define MINIMIZE_STACK_IMPACT */
+#include <stdio.h>
+#include <string.h>
+#include <stddef.h>
+
+#ifdef _MSC_VER
+#ifndef uint8_t
+typedef unsigned __int8 uint8_t;
+#endif
+#ifndef uint32_t
+typedef unsigned __int32 uint32_t;
+#endif
+#else
+#include <stdint.h>
+#endif
+
+#define SHA256_BYTES 32
+
+
+typedef struct {
+	uint8_t  buf[64];
+	uint32_t hash[8];
+	uint32_t bits[2];
+	uint32_t len;
+} sha256_context;
 
 
 
@@ -237,21 +259,28 @@ void sha256_done(sha256_context *ctx, uint8_t *hash)
 } /* sha256_done */
 
 /* -------------------------------------------------------------------------- */
-void sha256(const void *data, size_t len, uint8_t *hash)
+
+char* sha256(const void *data)
 {
 	sha256_context ctx;
-
+	uint8_t _hash[SHA256_BYTES];
+	char* hash;
+	int i;
+	
 	sha256_init(&ctx);
-	sha256_hash(&ctx, data, len);
-	sha256_done(&ctx, hash);
+	sha256_hash(&ctx, data, strlen(data));
+	sha256_done(&ctx, _hash);
+	
+	fot(i = 0;
+	
+	
 } /* sha256 */
 
 
 /* ========================================================================== */
 #ifdef SELF_TEST
 
-#include <stdio.h>
-#include <string.h>
+
 
 int main(void)
 {
