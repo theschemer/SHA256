@@ -1,7 +1,7 @@
 
 (library (csha256 csha256)
   (export
-    todo
+    sha256
   )
   (import
     (scheme)
@@ -10,8 +10,8 @@
 
   (define lib (load-shared-object "./lib/csha256/sha256.so"))
 
-  (define to
-    (foreign-procedure "todo" (string) string))
+  (define sha256
+    (foreign-procedure "sha256" (string) string))
  
  
  )
