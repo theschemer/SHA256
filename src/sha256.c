@@ -275,7 +275,7 @@ char* sha256(const void *data)
 	
 	for(i = 0; i < SHA256_BYTES; i++)
 	{
-		offset += sprintf(hash+offset,"%02x%s", _hash[i], "");
+		offset += sprintf(hash+offset, "%02x%s", _hash[i], "");
 	}
 	
 	hash[SHA256_BYTES * 2]='\0';
