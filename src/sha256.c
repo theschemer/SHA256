@@ -264,7 +264,7 @@ char* sha256(const void *data)
 {
 	sha256_context ctx;
 	uint8_t _hash[SHA256_BYTES];
-	int = i;
+	register uint8_t *p;
 	char hash[SHA256_BYTES * 2 + 1];
 	int offset = 0;
 	
@@ -273,9 +273,9 @@ char* sha256(const void *data)
 	sha256_done(&ctx, _hash);
 	
 	
-	for(i = 0; i < SHA256_BYTES; i++)
+	for(p = _hash; p < &_hash[SHA256_BYTES]; p++)
 	{
-		offset += sprintf(hash+offset, "%02x%s", _hash[i], "");
+		offset += sprintf(hash+offset, "%02x%s", *p, "");
 	}
 	
 	hash[SHA256_BYTES * 2]='\0';
