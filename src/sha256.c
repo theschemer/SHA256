@@ -271,7 +271,7 @@ char* sha256(const void *data)
 	sha256_hash(&ctx, data, strlen(data));
 	sha256_done(&ctx, _hash);
 	
-	for(p1 = hash, p2 = _hash; p1 < &_hash[SHA256_BYTES]; )
+	for(p1 = hash, p2 = _hash; p2 < &_hash[SHA256_BYTES]; )
 	{
 		*p1++ = *p2++;
 	}
