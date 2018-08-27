@@ -266,7 +266,9 @@ char* sha256(const void *data)
 	uint8_t _hash[SHA256_BYTES];
 	register uint8_t *p;
 	char hash[SHA256_BYTES * 2 + 1];
+    	char *result = hash;
 	int offset = 0;
+    
 	
 	sha256_init(&ctx);
 	sha256_hash(&ctx, data, strlen(data));
@@ -279,7 +281,8 @@ char* sha256(const void *data)
 	}
 	
 	hash[SHA256_BYTES * 2]='\0';
-	return hash;
+
+	return result;
 	
 } /* sha256 */
 
