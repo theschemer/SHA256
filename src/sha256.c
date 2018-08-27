@@ -264,20 +264,21 @@ char* sha256(const void *data)
 {
 	sha256_context ctx;
 	uint8_t _hash[SHA256_BYTES];
-	char *hash;
-	register char *p1, *p2;
+	int = i;
+	char hash[SHA256_BYTES * 2 + 1];
+	int offset = 0;
 	
 	sha256_init(&ctx);
 	sha256_hash(&ctx, data, strlen(data));
 	sha256_done(&ctx, _hash);
 	
-	for(p1 = hash, p2 = _hash; p2 < &_hash[SHA256_BYTES]; )
+	
+	for(i = 0; i < SHA256_BYTES; i++)
 	{
-		*p1++ = *p2++;
+		offset += sprintf(hash+offset,"%02x%s", _hash[i], "");
 	}
 	
-	*p1 = '\0';
-	
+	hash[SHA256_BYTES*2]='\0';
 	return hash;
 	
 } /* sha256 */
